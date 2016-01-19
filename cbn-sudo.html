@@ -1,0 +1,28 @@
+<script>
+	(function(sudo) {
+		function nue(param){
+			return param === null || param === undefined || param === "";
+		}
+		if (nue(sudo)) {
+			return;
+		}
+		var _oldOpen = XMLHttpRequest.prototype.open;
+		XMLHttpRequest.prototype.open = function (method, url, async, user, password) {
+			var newArguments = Array.prototype.slice.call(arguments);
+
+			//idea is from https://gist.github.com/jlong/2428561
+			var parser = document.createElement('a');
+			parser.href = url;
+			if (nue(parser.search)) {
+				parser.search = "?";
+			} else {
+				parser.search += "&";
+			}
+			parser.search += "sudo="+sudo;
+
+			//arguments[1] should be url
+			newArguments[1] = parser.href;
+			_oldOpen.apply(this, newArguments);
+		};
+	})(window.sudoEmail);
+</script>

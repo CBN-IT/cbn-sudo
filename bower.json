@@ -1,0 +1,18 @@
+{
+    "name": "save-excel",
+    "version": "0.1",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "../",
+        "test",
+        "demo",
+        "index.html"
+    ],
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+}
